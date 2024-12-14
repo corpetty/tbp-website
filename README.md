@@ -1,4 +1,22 @@
-# Payload Website Template
+# TBP Relevant Stuff
+
+## Pages
+- Home
+  - sections:
+    - recent episodes
+    - hero
+    - recent blog posts
+- Episode Posts
+  - parameter: show
+  - parameter: sub-category (optional)
+- Blog Posts
+  - parameter: author
+- About
+- Contact 
+- Shows
+  - parameter: archived
+
+# Payload Website Template Stuff
 
 This is the official [Payload Website Template](https://github.com/payloadcms/payload/blob/main/templates/website). Use it to power websites, blogs, or portfolios from small to enterprise. This repo includes a fully-working backend, enterprise-grade admin panel, and a beautifully designed, production-ready website.
 

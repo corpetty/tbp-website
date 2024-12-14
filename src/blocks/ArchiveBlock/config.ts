@@ -42,17 +42,32 @@ export const Archive: Block = {
       ],
     },
     {
-      name: 'relationTo',
+      name: 'relationToPosts',
       type: 'select',
       admin: {
         condition: (_, siblingData) => siblingData.populateBy === 'collection',
       },
       defaultValue: 'posts',
-      label: 'Collections To Show',
+      label: 'Post Collections To Show',
       options: [
         {
           label: 'Posts',
           value: 'posts',
+        },
+      ],
+    },
+    {
+      name: 'relationToEpisodes',
+      type: 'select',
+      admin: {
+        condition: (_, siblingData) => siblingData.populateBy === 'collection',
+      },
+      defaultValue: 'episodes',
+      label: 'Episode Collections To Show',
+      options: [
+        {
+          label: 'Episodes',
+          value: 'episodes',
         },
       ],
     },
@@ -85,6 +100,16 @@ export const Archive: Block = {
       hasMany: true,
       label: 'Selection',
       relationTo: ['posts'],
+    },
+    {
+      name: 'selectedEpisodes',
+      type: 'relationship',
+      admin: {
+        condition: (_, siblingData) => siblingData.populateBy === 'selection',
+      },
+      hasMany: true,
+      label: 'Selection',
+      relationTo: ['episodes'],
     },
   ],
   labels: {

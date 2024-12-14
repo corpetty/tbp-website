@@ -1,6 +1,6 @@
 import type { Metadata } from 'next/types'
 
-import { PostCollectionArchive } from '@/components/PostCollectionArchive'
+import { EpisodeCollectionArchive } from '@/components/EpisodeCollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
@@ -14,8 +14,8 @@ export const revalidate = 600
 export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
-  const posts = await payload.find({
-    collection: 'posts',
+  const episodes = await payload.find({
+    collection: 'episodes',
     depth: 1,
     limit: 12,
     overrideAccess: false,
@@ -32,24 +32,24 @@ export default async function Page() {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <h1>Episodes</h1>
         </div>
       </div>
 
       <div className="container mb-8">
         <PageRange
-          collection="posts"
-          currentPage={posts.page}
+          collection="episodes"
+          currentPage={episodes.page}
           limit={12}
-          totalDocs={posts.totalDocs}
+          totalDocs={episodes.totalDocs}
         />
       </div>
 
-      <PostCollectionArchive posts={posts.docs} />
+      <EpisodeCollectionArchive episodes={episodes.docs} />
 
       <div className="container">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+        {episodes.totalPages > 1 && episodes.page && (
+          <Pagination page={episodes.page} totalPages={episodes.totalPages} />
         )}
       </div>
     </div>
@@ -58,6 +58,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`,
+    title: `The Bitcoin Podcast Episodes`,
   }
 }
