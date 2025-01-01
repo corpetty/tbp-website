@@ -1,13 +1,35 @@
-build
-dist / media
-node_modules
-.DS_Store
+# Dependencies
+node_modules/
+
+# Environment variables
 .env
-.next
-.vercel
+.env.local
+.env.development
+.env.test
+.env.production
 
-# Payload default media upload directory
-public/media/
+# Build output
+.next/
+out/
+dist/
 
-public/robots.txt
-public/sitemap*.xml
+# Cache
+.cache/
+.turbo/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+*.log
+logs/
+
+# Misc
+.DS_Store
+*.pem

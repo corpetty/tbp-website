@@ -1,0 +1,29 @@
+# Project Type
+type: Next.js + Payload CMS
+purpose: Podcast hosting platform
+
+# Key Directories
+src/collections/Episodes/: Episode collection backend
+src/components/Episode*: Episode-related frontend components
+src/heros/EpisodeHero/: Episode hero section components
+src/blocks/RelatedEpisodes/: Episode-related content blocks
+
+# Important Config Files
+payload.config.ts: Main Payload CMS configuration
+next.config.js: Next.js configuration
+tailwind.config.mjs: Tailwind CSS configuration
+postcss.config.js: PostCSS configuration
+
+# Episode Collection Context
+- Located in src/collections/Episodes/
+- Uses standard Payload collection structure with index.ts and hooks/
+- Connected to frontend via EpisodeCard, EpisodeCollectionArchive components
+- Integrated with hero sections via EpisodeHero
+- Related episodes functionality via RelatedEpisodes block
+
+# Development Workflow
+- Use npm run dev to start development server
+- Payload admin interface at /admin
+- Next.js frontend at /
+- Tailwind CSS for styling
+- TypeScript for type safety
