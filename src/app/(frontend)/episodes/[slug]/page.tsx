@@ -1,19 +1,20 @@
 import type { Metadata } from 'next'
 
-import { RelatedEpisodes } from '@/blocks/RelatedEpisodes/Component'
-import { PayloadRedirects } from '@/components/PayloadRedirects'
+import { RelatedEpisodes } from '../../../../blocks/RelatedEpisodes/Component'
+import { PayloadRedirects } from '../../../../components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import RichText from '@/components/RichText'
+import RichText from '../../../../components/RichText'
 
-import type { Episode } from '@/payload-types'
+import type { Episode } from '../../../../payload-types'
 
-import { EpisodeHero } from '@/heros/EpisodeHero'
-import { generateMeta } from '@/utilities/generateMeta'
+import { EpisodeHero } from '../../../../heros/EpisodeHero'
+import { generateMeta } from '../../../../utilities/generateMeta'
 import PageClient from './page.client'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { LivePreviewListener } from '../../../../components/LivePreviewListener'
+import { RenderBlocks } from '../../../../blocks/RenderBlocks'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -62,6 +63,11 @@ export default async function Episode({ params: paramsPromise }: Args) {
 
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
+          {episode.simplecastEmbed && episode.simplecastEmbed.length > 0 && (
+            <div className="max-w-[48rem] mx-auto mb-8">
+              <RenderBlocks blocks={episode.simplecastEmbed} />
+            </div>
+          )}
           <RichText className="max-w-[48rem] mx-auto" data={episode.content} enableGutter={false} />
           {episode.relatedEpisodes && episode.relatedEpisodes.length > 0 && (
             <RelatedEpisodes

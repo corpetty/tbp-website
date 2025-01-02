@@ -121,7 +121,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | SimplecastEmbedBlock)[];
   meta?: {
     title?: string | null;
     image?: (string | null) | Media;
@@ -323,6 +323,7 @@ export interface MediaBlock {
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
+  archiveType?: ('posts' | 'episodes') | null;
   introContent?: {
     root: {
       type: string;
@@ -339,21 +340,19 @@ export interface ArchiveBlock {
     [k: string]: unknown;
   } | null;
   populateBy?: ('collection' | 'selection') | null;
-  relationToPosts?: 'posts' | null;
-  relationToEpisodes?: 'episodes' | null;
   categories?: (string | Category)[] | null;
   limit?: number | null;
   selectedDocs?:
-    | {
-        relationTo: 'posts';
-        value: string | Post;
-      }[]
-    | null;
-  selectedEpisodes?:
-    | {
-        relationTo: 'episodes';
-        value: string | Episode;
-      }[]
+    | (
+        | {
+            relationTo: 'posts';
+            value: string | Post;
+          }
+        | {
+            relationTo: 'episodes';
+            value: string | Episode;
+          }
+      )[]
     | null;
   id?: string | null;
   blockName?: string | null;
@@ -446,6 +445,7 @@ export interface User {
 export interface Episode {
   id: string;
   title: string;
+  simplecastEmbed?: SimplecastEmbedBlock[] | null;
   content: {
     root: {
       type: string;
@@ -481,6 +481,18 @@ export interface Episode {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SimplecastEmbedBlock".
+ */
+export interface SimplecastEmbedBlock {
+  episodeId: string;
+  height?: number | null;
+  darkMode?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'simplecastEmbed';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -916,14 +928,12 @@ export interface PagesSelect<T extends boolean = true> {
         archive?:
           | T
           | {
+              archiveType?: T;
               introContent?: T;
               populateBy?: T;
-              relationToPosts?: T;
-              relationToEpisodes?: T;
               categories?: T;
               limit?: T;
               selectedDocs?: T;
-              selectedEpisodes?: T;
               id?: T;
               blockName?: T;
             };
@@ -933,6 +943,15 @@ export interface PagesSelect<T extends boolean = true> {
               form?: T;
               enableIntro?: T;
               introContent?: T;
+              id?: T;
+              blockName?: T;
+            };
+        simplecastEmbed?:
+          | T
+          | {
+              episodeId?: T;
+              height?: T;
+              darkMode?: T;
               id?: T;
               blockName?: T;
             };
@@ -957,6 +976,19 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface EpisodesSelect<T extends boolean = true> {
   title?: T;
+  simplecastEmbed?:
+    | T
+    | {
+        simplecastEmbed?:
+          | T
+          | {
+              episodeId?: T;
+              height?: T;
+              darkMode?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   content?: T;
   relatedEpisodes?: T;
   categories?: T;

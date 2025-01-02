@@ -14,6 +14,7 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { SimplecastEmbed } from '../../blocks/SimplecastEmbed/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -25,7 +26,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { slugField } from '@/fields/slug'
+import { slugField } from '../../fields/slug'
 
 export const Episodes: CollectionConfig<'episodes'> = {
   slug: 'episodes',
@@ -35,9 +36,6 @@ export const Episodes: CollectionConfig<'episodes'> = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
-  // This config controls what's populated by default when a episode is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'episodes'>
   defaultPopulate: {
     title: true,
     slug: true,
@@ -73,6 +71,14 @@ export const Episodes: CollectionConfig<'episodes'> = {
       name: 'title',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'simplecastEmbed',
+      type: 'blocks',
+      blocks: [SimplecastEmbed],
+      admin: {
+        description: 'Add the Simplecast player for this episode',
+      },
     },
     {
       type: 'tabs',
@@ -145,13 +151,9 @@ export const Episodes: CollectionConfig<'episodes'> = {
             MetaImageField({
               relationTo: 'media',
             }),
-
             MetaDescriptionField({}),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -188,9 +190,6 @@ export const Episodes: CollectionConfig<'episodes'> = {
       hasMany: true,
       relationTo: 'users',
     },
-    // This field is only used to populate the user data via the `populateAuthors` hook
-    // This is because the `user` collection has access control locked to protect user privacy
-    // GraphQL will also not return mutated user data that differs from the underlying schema
     {
       name: 'populatedAuthors',
       type: 'array',
@@ -222,7 +221,7 @@ export const Episodes: CollectionConfig<'episodes'> = {
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 100,
       },
     },
     maxPerDoc: 50,

@@ -12,6 +12,21 @@ export const Archive: Block = {
   interfaceName: 'ArchiveBlock',
   fields: [
     {
+      name: 'archiveType',
+      type: 'select',
+      defaultValue: 'posts',
+      options: [
+        {
+          label: 'Posts',
+          value: 'posts',
+        },
+        {
+          label: 'Episodes',
+          value: 'episodes',
+        },
+      ],
+    },
+    {
       name: 'introContent',
       type: 'richText',
       editor: lexicalEditor({
@@ -42,36 +57,6 @@ export const Archive: Block = {
       ],
     },
     {
-      name: 'relationToPosts',
-      type: 'select',
-      admin: {
-        condition: (_, siblingData) => siblingData.populateBy === 'collection',
-      },
-      defaultValue: 'posts',
-      label: 'Post Collections To Show',
-      options: [
-        {
-          label: 'Posts',
-          value: 'posts',
-        },
-      ],
-    },
-    {
-      name: 'relationToEpisodes',
-      type: 'select',
-      admin: {
-        condition: (_, siblingData) => siblingData.populateBy === 'collection',
-      },
-      defaultValue: 'episodes',
-      label: 'Episode Collections To Show',
-      options: [
-        {
-          label: 'Episodes',
-          value: 'episodes',
-        },
-      ],
-    },
-    {
       name: 'categories',
       type: 'relationship',
       admin: {
@@ -95,21 +80,13 @@ export const Archive: Block = {
       name: 'selectedDocs',
       type: 'relationship',
       admin: {
-        condition: (_, siblingData) => siblingData.populateBy === 'selection',
+        condition: (_, siblingData) =>
+          siblingData.populateBy === 'selection' &&
+          (siblingData.archiveType === 'posts' || siblingData.archiveType === 'episodes'),
       },
       hasMany: true,
       label: 'Selection',
-      relationTo: ['posts'],
-    },
-    {
-      name: 'selectedEpisodes',
-      type: 'relationship',
-      admin: {
-        condition: (_, siblingData) => siblingData.populateBy === 'selection',
-      },
-      hasMany: true,
-      label: 'Selection',
-      relationTo: ['episodes'],
+      relationTo: ['posts', 'episodes'],
     },
   ],
   labels: {
