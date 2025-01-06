@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -7,7 +7,12 @@ export default {
     './src/**/*.{ts,tsx}',
   ],
   darkMode: ['selector', '[data-theme="dark"]'],
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [
+    // eslint-disable-next-line
+    require('tailwindcss-animate'),
+    // eslint-disable-next-line
+    require('@tailwindcss/typography'),
+  ],
   prefix: '',
   safelist: [
     'lg:col-span-4',
@@ -54,41 +59,41 @@ export default {
       },
       colors: {
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+          DEFAULT: 'hsl(24, 100%, 50%)', // #FF6B00
+          foreground: 'hsl(0, 0%, 100%)', // #FFFFFF
         },
-        background: 'hsl(var(--background))',
-        border: 'hsla(var(--border))',
+        background: 'hsl(0, 0%, 20%)', // #333333
+        border: 'hsl(0, 0%, 17%)', // #2B2B2B
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: 'hsl(0, 0%, 17%)', // #2B2B2B
+          foreground: 'hsl(0, 0%, 100%)', // #FFFFFF
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: 'hsl(0, 84.2%, 60.2%)',
+          foreground: 'hsl(0, 0%, 100%)', // #FFFFFF
         },
-        foreground: 'hsl(var(--foreground))',
-        input: 'hsl(var(--input))',
+        foreground: 'hsl(0, 0%, 100%)', // #FFFFFF
+        input: 'hsl(0, 0%, 17%)', // #2B2B2B
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          DEFAULT: 'hsl(0, 0%, 17%)', // #2B2B2B
+          foreground: 'hsl(0, 0%, 100%)', // #FFFFFF
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          DEFAULT: 'hsl(0, 0%, 17%)', // #2B2B2B
+          foreground: 'hsl(0, 0%, 100%)', // #FFFFFF
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'hsl(24, 100%, 50%)', // #FF6B00
+          foreground: 'hsl(0, 0%, 100%)', // #FFFFFF
         },
-        ring: 'hsl(var(--ring))',
+        ring: 'hsl(24, 100%, 50%)', // #FF6B00
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: 'hsl(0, 0%, 17%)', // #2B2B2B
+          foreground: 'hsl(0, 0%, 100%)', // #FFFFFF
         },
-        success: 'hsl(var(--success))',
-        error: 'hsl(var(--error))',
-        warning: 'hsl(var(--warning))',
+        success: 'hsl(120, 100%, 25%)',
+        error: 'hsl(0, 100%, 50%)',
+        warning: 'hsl(45, 100%, 50%)',
       },
       fontFamily: {
         mono: ['var(--font-geist-mono)'],

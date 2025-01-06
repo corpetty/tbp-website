@@ -27,3 +27,6 @@ postcss.config.js: PostCSS configuration
 - Next.js frontend at /
 - Tailwind CSS for styling
 - TypeScript for type safety
+
+# Technology Stack Details
+- Payload CMS version 3.0

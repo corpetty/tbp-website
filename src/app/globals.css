@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: auto;
+    font-weight: auto;
+  }
+
+  :root {
+    --background: 0 0% 20%; /* #333333 */
+    --foreground: 0 0% 100%; /* #FFFFFF */
+
+    --card: 0 0% 17%; /* #2B2B2B */
+    --card-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --popover: 0 0% 17%; /* #2B2B2B */
+    --popover-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --primary: 24 100% 50%; /* #FF6B00 */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --secondary: 0 0% 17%; /* #2B2B2B */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --muted: 0 0% 17%; /* #2B2B2B */
+    --muted-foreground: 24 100% 50%; /* #FF6B00 */
+
+    --accent: 24 100% 50%; /* #FF6B00 */
+    --accent-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --border: 0 0% 17%; /* #2B2B2B */
+    --input: 0 0% 17%; /* #2B2B2B */
+    --ring: 24 100% 50%; /* #FF6B00 */
+
+    --radius: 0.2rem;
+
+    --success: 120 100% 25%;
+    --warning: 45 100% 50%;
+    --error: 0 100% 50%;
+  }
+
+  [data-theme='dark'] {
+    --background: 0 0% 20%; /* #333333 */
+    --foreground: 0 0% 100%; /* #FFFFFF */
+
+    --card: 0 0% 17%; /* #2B2B2B */
+    --card-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --popover: 0 0% 17%; /* #2B2B2B */
+    --popover-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --primary: 24 100% 50%; /* #FF6B00 */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --secondary: 0 0% 17%; /* #2B2B2B */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --muted: 0 0% 17%; /* #2B2B2B */
+    --muted-foreground: 24 100% 50%; /* #FF6B00 */
+
+    --accent: 24 100% 50%; /* #FF6B00 */
+    --accent-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --border: 0 0% 17%; /* #2B2B2B */
+    --input: 0 0% 17%; /* #2B2B2B */
+    --ring: 24 100% 50%; /* #FF6B00 */
+
+    --radius: 0.2rem;
+
+    --success: 120 100% 25%;
+    --warning: 45 100% 50%;
+    --error: 0 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+  }
+}
+
+html {
+  opacity: 0;
+}
+
+html[data-theme='dark'],
+html[data-theme='light'] {
+  opacity: initial;
+}
